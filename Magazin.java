@@ -11,6 +11,12 @@ public class Magazin {
     public static Mobila[] tab;
     public int numarul_de_mobile;
 
+    /**
+     * Constructor
+     * @param nume
+     * @param adresa
+     * @param capacitate
+     */
     Magazin(String nume, String adresa, int capacitate) {
         this.nume = nume;
         this.adresa = adresa;
@@ -18,6 +24,10 @@ public class Magazin {
         this.numarul_de_mobile=0;
     }
 
+    /**
+     * Adaygare de mobila
+     * @param m mobila
+     */
     public void addMobila(Mobila m) {
         if (numarul_de_mobile < tab.length) {
             tab[numarul_de_mobile] = m;
@@ -27,6 +37,11 @@ public class Magazin {
         }
     }
 
+    /**
+     * Numara cate produse au descrierea data
+     * @param cuvant o lista de cuvinte (descrierea)
+     * @return un numar de mobile (int)
+     */
     public int nrMobileCuDescriereX(List<String> cuvant){
         int nr=0;
         boolean ok;
@@ -46,38 +61,19 @@ public class Magazin {
            }
         }
         return nr;
-    }/*
-    public int nrMobileCuDescriereX(List<String> cuvant) {
-        int nr = 0;
-        boolean ok;
-
-        // Parcurgem fiecare magazin din array
-        for (Magazin magazin : mag) {
-            if (magazin != null) {  // Verificăm dacă magazinul nu este null
-                for (Mobila m : magazin.tab) {  // Accesăm lista de mobiliare din magazin
-                    if (m != null) {  // Verificăm dacă mobila nu este null
-                        ok = true;
-                        for (String unCuvant : cuvant) {
-                            if (!m.descrie.contains(unCuvant)) {
-                                ok = false;
-                                break;
-                            }
-                        }
-                        if (ok) {
-                            nr++;
-                        }
-                    }
-                }
-            }
-        }
-        return nr;
     }
-*/
 
+    /**
+     * @return numele magazinului
+     */
     public String getNumeMagazin(){
         return nume;
     }
 
+    /**
+     * @param mag magazin
+     * @return pretul tuturor produselor dintr un magazin
+     */
     public static double pretTotal(Magazin mag){
         double total = 0;
         for(Mobila mobila : tab){
@@ -86,6 +82,11 @@ public class Magazin {
         return total;
     }
 
+    /**
+     * Aflarea celui mai ieftin magazin
+     * @param magazin
+     * @return
+     */
     public static String magazinIeftin(Magazin[] magazin){
         Map<String,Double> map = new HashMap<>();
         for(Magazin m : magazin){
@@ -105,6 +106,9 @@ public class Magazin {
         return null;
     }
 
+    /**
+     * @return toate magazinele
+     */
     @Override
     public String toString() {
         return "Magazinul " + nume + " cu adresa '" + adresa +

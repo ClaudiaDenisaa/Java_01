@@ -9,6 +9,16 @@ public class Mobila {
     public double h;
     public double pret;
 
+    /**
+     * Constructor
+     * @param nume
+     * @param descrie
+     * @param material
+     * @param L lungime
+     * @param l latime
+     * @param h inaltime
+     * @param pret
+     */
     Mobila(String nume, String descrie, String material, double L, double l, double h, double pret) {
         this.nume = nume;
         this.descrie = descrie;
@@ -19,10 +29,16 @@ public class Mobila {
         this.pret = pret;
     }
 
+    /**
+     * @return pretul mobilei
+     */
     public double getPret(){
         return pret;
     }
 
+    /**
+     * @return mobila
+     */
     @Override
     public String toString() {
         return nume + ',' + descrie + ", material='" + material + ", Lungime=" + L + ", latime="

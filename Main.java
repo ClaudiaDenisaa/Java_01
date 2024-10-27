@@ -1,46 +1,76 @@
-package t_1_;
-
-import java.util.Arrays;
+package tema;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
+import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
-        Mobila m1 = new Mobila("Dulap","Dulap alb","lemn",1.60,0.4,2,300);
-        Mobila m2 = new Mobila("Scaun","Scaun tapitat","lemn",0.4,0.4,2,0.6);
-        Mobila m3 = new Mobila("Birou","Birou alb","lemn",1.0,0.4,0.6,160);
-        Mobila m4 = new Mobila("Dulap","Dulap maro","lemn stejar",1.60,0.4,2,399.99);
-        Mobila m5 = new Mobila("Scaun","Scaun alb","lemn",1.0,0.4,0.6,54.99);
-        Mobila m6 = new Mobila("Birou","Dulap alb","lemn",0.8,0.4,1,200);
 
-        Magazin mag1 = new Magazin("Dedeman","Arad,nr. 249",2);
-        Magazin mag2 = new Magazin("Brico","Timisoara,nr. 200",2);
-        Magazin mag3 = new Magazin("BricoStore","Oradea,nr. 169",2);
+        List<String> autori = new ArrayList<>();
+        autori.add("Ion Ionescu");
+        autori.add("Maria Anghelescu");
+        autori.add("Alex Petrescu");
+        String[] sectiuni = {"Introducere", "Continut introducere...", "Cuprins", "Continut cuprins...", "Incheiere", "Continut incheiere..."};
+        List<String> bibliografie = new ArrayList<>();
+        bibliografie.add("www.google.com");
+        bibliografie.add("www.articolcool.ro");
 
-        mag1.addMobila(m1);
-        mag1.addMobila(m2);
-        mag2.addMobila(m3);
-        mag2.addMobila(m4);
-        mag3.addMobila(m5);
-        mag3.addMobila(m6);
+        ArticolStiintific a1 = new ArticolStiintific("Muzica contemporala", autori, sectiuni, bibliografie);
 
-        Magazin[] tab_magazine = new Magazin[3];
-        tab_magazine[0] = mag1;
-        tab_magazine[1] = mag2;
-        tab_magazine[2] = mag3;
+        List<String> subiecte = new ArrayList<>();
+        subiecte.add("Genuri muzicale");
+        subiecte.add("Artistii");
+        subiecte.add("Identificarea publicului");
+        String[] minuta = {"0.0", "1.2", "3.0"};
+        String[] pers = {"Maria Ianovici", "Raluca Mare"};
+        //Date d1 = new Date(2014, 11, 01);
+        RaportSedinta r1 = new RaportSedinta("Proiect Arta Muzicala", LocalDate.of(2014, 11, 1), subiecte, minuta, pers);
 
-        for(Magazin m : tab_magazine){
-            System.out.println(m);
+
+        List<String> autori2 = new ArrayList<>();
+        autori2.add("Ion Ionescu");
+        autori2.add("Maria Anghelescu");
+        autori2.add("Alex Petrescu");
+        String[] sectiuni2 = {"Introducere", "Continut introducere...", "Cuprins", "Continut cuprins...", "Incheiere", "Continut incheiere..."};
+        List<String> bibliografie2 = new ArrayList<>();
+        bibliografie2.add("www.google.com");
+        bibliografie2.add("www.anatomiaumana.ro");
+
+        ArticolStiintific a2 = new ArticolStiintific("Ochiul uman", autori2, sectiuni2, bibliografie2);
+
+
+        List<String> subiecte2 = new ArrayList<>();
+        subiecte2.add("Structura ochiului");
+        subiecte2.add("Bolile");
+        subiecte2.add("Tehnici si aparatura");
+        subiecte2.add("Ce imbunatatiri se pot aduce pentru aparatura?");
+        String[] minuta2 = {"10.0", "1.2", "30.0"};
+        String[] pers2 = {"Maria Ianovici", "Raluca Mare"};
+        //Date d2 = new Date(2014, 11, 01);
+
+        RaportSedinta r2 = new RaportSedinta("Conferinta", LocalDate.of(2014, 11, 1), subiecte2, minuta2, pers2);
+
+
+        Raport[] tab = new Raport[4];
+        tab[0] = r1;
+        tab[1] = a1;
+        tab[2] = r2;
+        tab[3] = a2;
+
+        Rapoarte tabRapoarte = new Rapoarte(tab);
+
+        for (Raport r : tab) {
+            System.out.println(r.generareTitlu());
+            System.out.println(r.generareContinut());
+            System.out.println(r.generareIncheiere());
+            System.out.println("\n\n\n");
         }
 
-        //System.out.println(mag1.magazinIeftin(tab_magazine));  //daca metoda magazinIeftin nu e statica
-        System.out.println(Magazin.magazinIeftin(tab_magazine) + " este magazinul cu cele mai ieftine produse"); //metoda e statica
+        int nrArt = Rapoarte.numarArticole(tab);
+        System.out.println("Numarul de articole stiintifice din tablou este de: " + nrArt);
 
-        List<String> descriere = Arrays.asList("Dulap","alb");
-        int nrTotal = 0;
-        for (Magazin magazin : tab_magazine) {
-            nrTotal += magazin.nrMobileCuDescriereX(descriere);
-        }
-        String d =String.join(" ", descriere);
-        System.out.println("\nNumarul total de magazine cu descrierea: \"" + d+ "\" este: " + nrTotal);
+        LocalDate sedinteMulte = tabRapoarte.DATAceleMaiMulteSedinte();
+        System.out.println("Data cu cele mai multe ședințe este: " + sedinteMulte);
     }
+
 }
